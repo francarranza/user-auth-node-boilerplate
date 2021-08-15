@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "pretty": true,
+    "inlineSourceMap": true,
+    "target": "es2017",
+    "outDir": "./dist",
+    "lib": ["es6"],
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "typeRoots" : ["./node_modules/@types", "./src/@types"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "strict": true
+  },
+  "include": [
+    "./src/**/*.js",
+    "./src/**/*.ts",
+    "./tests/**/*.ts",
+    "./tests/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "!node_modules/@types"
+  ]
+}
