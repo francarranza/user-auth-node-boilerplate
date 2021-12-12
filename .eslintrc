@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "extends": "airbnb-base",
+  "rules": {
+    "no-console": 1,
+    "prettier/prettier": 2,
+    "interface-name-prefix": {
+      "prefixWithI": "always"
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
