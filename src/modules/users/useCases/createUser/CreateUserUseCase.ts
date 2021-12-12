@@ -44,7 +44,7 @@ export class CreateUserUseCase extends UseCase {
       } else {
         this.logger.error(`CreateUserUseCase`, err);
       }
-      throw err;
+      throw new UserFieldError(err.message);
     }
 
   }

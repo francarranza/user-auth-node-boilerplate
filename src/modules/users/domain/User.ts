@@ -31,33 +31,38 @@ export function makeUserEntity ({
       uuid,
       email,
       password,
+      hashedPassword,
       createdAt = new Date(),
       updatedAt = new Date(),
     }: {
       uuid?: Uuid,
       email: Email,
-      password: string;
+      password?: string,
+      hashedPassword?: string,
       createdAt?: Date,
       updatedAt?: Date,
     }) {
 
       this.validateEmail(email);
-      this.validatePassword(password);
+      this.validatePassword({ uuid, password });
 
       this.uuid = uuid || genUuid4();
       this.email = email;
       this.createdAt = createdAt;
       this.updatedAt = updatedAt;
-      this.hashedPassword = passwordHelpers.hashPassword(password);
+      this.hashedPassword = hashedPassword || passwordHelpers.hashPassword(password);
     }
 
     validateEmail = (email: Email) => {
-      if (!email) throw new EntityFieldError('User email is empty');
+      if (!email) throw new EntityFieldError('User email not provided');
       // Todo: more validations
     }
 
-    validatePassword = (password: string) => {
-      if (!password) throw new EntityFieldError('User password is empty');
+    validatePassword = ({ uuid, password }: { uuid: Uuid, password: string }) => {
+      // User already in db. Already has hashed password
+      if (uuid) return;
+
+      if (!password) throw new EntityFieldError('User password not provided');
       if (password.length < 8) throw new EntityFieldError('Password should have at least 8 characters');
     }
   }
